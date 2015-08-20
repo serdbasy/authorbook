@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Kitaplar</title>
+	<script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+	<script src="js/app.js" type="text/javascript"></script>
+	<link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div ng-controller="bookCtrl" ng-init="getBooks();getAuthors();">
+	<form name="authorForm">
+		<input ng-model="id" type="hidden">
+		<input ng-model="name" type="text"><br>
+		<select ng-model="author"><br>
+			<option ng-repeat="aut in authors" value="{{ aut.id }}">{{ aut.name }} {{ aut.surname }}</option>
+		</select>
+		<button ng-click="addBook()">{{ buttonName }}</button>
+		<button ng-show="buttonName == 'Düzenle'" ng-click="cancelBook()">İptal</button>
+	</form>
+	<ul>
+		<li ng-repeat="book in books | filter: { 'book.Author': '!' }">
+			{{ book.name }} {{ book.Auther.name }} {{ book.Auther.surname }} <span ng-click="editBook(book.id)">Düzenle</span><span ng-click="deleteBook(book.id)">Sil</span>
+		</li>
+	</ul>
+
+</div>
+<a href="index.html">Anasayfa</a>
+<a href="author.html">Yazarlar</a>
+
+</body>
+</html>
